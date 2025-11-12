@@ -32,7 +32,7 @@ export async function GET() {
           type: "host-to-guest",
           status: "published",
           rating: null,
-          publicReview: "Shane and family are wonderful! Would definitely host again :)",
+          publicReview: "Had a great time there - recommended. Positive: Great location - easy to get to everything in London. Felt like I was living there and not just staying in a hotel room Negative: Bathrooms need a bit more ventilation",
           reviewCategory: [
             { category: "cleanliness", rating: 10 },
             { category: "communication", rating: 10 },
@@ -47,7 +47,7 @@ export async function GET() {
           type: "guest-to-host",
           status: "published",
           rating: 9,
-          publicReview: "Beautiful property, great location. A few minor issues with WiFi",
+          publicReview: "Virkelig et Problemfrit Ophold Positive: Fra start til slut var opholdet problemfrit 🌟. Stedet var rent 🧼, atmosfæren afslappende 🌿, og kommunikationen i top 💬. Kunne ikke have ønsket mig mere 🙌.",
           reviewCategory: [
             { category: "cleanliness", rating: 9 },
             { category: "communication", rating: 8 },
@@ -62,7 +62,7 @@ export async function GET() {
           type: "host-to-guest",
           status: "draft",
           rating: null,
-          publicReview: "Excellent guests, kept everything clean and tidy. Highly recommended!",
+          publicReview: "Dostatečné Positive: Dobrá lokalita, ochotný personál. Negative: Ubytování není snadné najít. Fotografie absolutně neodpovídají realitě. Nejsou k dispozici žádné rozkládací pohovky, jen nafukovací matrace, které je nutné si připravit a povléct. Jedna ze dvou matrací byla děravá a přelepená izolepou, což bylo nedostatečné. Personál nám ji ochotně vyměnil za trochu méně hroznou. Nebyla sice děravá, ale byla špinavá a do rána byla poloviční. Při vstupu ucítíte nepříjemný zápach, pravděpodobně z ventilace na záchodě.",
           reviewCategory: [
             { category: "cleanliness", rating: 10 },
             { category: "respect_house_rules", rating: 10 },

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { fetchHostawayReviewsFromServer, normalizeReview, fetchGoogleReviews, normalizeGoogleReview } from "@/lib/api"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Star, MapPin, Wifi, Home, Users, Hotel, PaintBucket, ForkKnife, BathIcon } from "lucide-react"
+import { Star, Wifi, Hotel, PaintBucket, ForkKnife, BathIcon } from "lucide-react"
 import Link from "next/link"
 import { ReviewCard } from "@/components/review-card"
 import Image from "next/image"
@@ -75,7 +75,7 @@ export default function ReviewsPage() {
         </div>
       </header>
 
-      <section className="bg-linear-to-b from-accent to-background py-4 sm:py-8 md:py-4">
+      <section className="py-4 sm:py-8 md:py-4">
         <div className="container mx-auto px-8">
           <div className="grid gap-2 md:gap-2 md:grid-cols-2">
             
@@ -195,8 +195,8 @@ export default function ReviewsPage() {
             </Button> 
           </div>
 
-           <div className="h-px w-full bg-border my-8" />
-           <span className="flex flex-row text-primary items-center mt-4 font-bold text-xl mb-5" ><span className="text-primary text-xl font-bold mr-3"> Reviews</span> <Star className="h-6 w-6 fill-amber-400 text-amber-400 mr-1 " />  {averageRating}  ({reviews.length})  </span>
+          <div className="h-px w-full bg-border my-8" />
+          <span className="flex flex-row text-primary items-center mt-4 font-bold text-xl mb-5" ><span className="text-primary text-xl font-bold mr-3"> Reviews</span> <Star className="h-6 w-6 fill-amber-400 text-amber-400 mr-1 " />  {averageRating}  ({reviews.length})  </span>
           {loading ? (
             <div className="py-12 text-center text-foreground/50">Loading reviews...</div>
           ) : reviews.length === 0 ? (
@@ -210,7 +210,26 @@ export default function ReviewsPage() {
               ))}
             </div>
           )}
+          <Button className="py-6 px-6 bg-background hover:bg-background cursor-pointer text-primary border rounded-3xl text-sm sm:text-base mt-5">
+            Show all {reviews.length} reviews
+          </Button> 
+          <div className="h-px w-full bg-border my-8" />
+          <span className="flex flex-row text-primary items-center mt-4 font-bold text-xl mb-5">Good to know</span>
+          <div>
+            <span className=" text-primary font-semibold mb-4">House Rules</span>
+             <div className="grid grid-cols-2 md:grid-cols-2 gap-3 my-5">
+              {rules.map((item, i) => (
+                <span key={i} className="">{item}</span>
+              ))}
+             </div>
+             <Button className="px-4 py-4 bg-background hover:bg-background cursor-pointer text-primary border rounded-3xl text-sm sm:text-base">
+              Show more
+            </Button>
+          </div>
+          <p className=" text-primary font-semibold mt-6 mb-4">Cancellation policy</p>
+          <span className="">100% refund up to 14 days before arrival</span>
         </div>
+        
       </section>
 
      
@@ -268,3 +287,5 @@ const amenitiesItem: {title: string; icon: React.JSX.Element}[] = [
     icon: <ForkKnife />
   }
 ]
+
+const rules: string[] = ["Check-in: 3 pm", "Pets: not allowed", "Check-out: 10 am", "Smoking inside: not allowed" ]

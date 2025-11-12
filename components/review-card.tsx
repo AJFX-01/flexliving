@@ -1,16 +1,19 @@
-import { Card } from "@/components/ui/card"
 import { Star, Globe } from "lucide-react"
+import { ReviewText } from "./review-text"
 
 
 export function ReviewCard({ review }: ReviewCardProps) {
   return (
-    <Card className="flex flex-col gap-4 p-6 transition-all hover:shadow-lg">
+    <div className="flex flex-col gap-2  transition-all">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-1">
           {Array.from({ length: review.rating }).map((_, i) => (
-            <Star key={i} className="h-4 w-4 fill-primary text-primary" />
+            <Star key={i} className="h-3 w-3 fill-primary text-primary" />
           ))}
-          <span className="text-sm font-medium text-primary">{review.rating}/5</span>
+          <span className="text-[17px] font-medium text-primary/80"> · {review.guestName} ·  {new Date(review.submittedAt).toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+          })}</span>
         </div>
         {review.source === "google" && (
           <span className="inline-flex items-center gap-1 rounded-full bg-red-50 px-2 py-1 text-xs font-medium text-red-700">
@@ -20,7 +23,8 @@ export function ReviewCard({ review }: ReviewCardProps) {
         )}
       </div>
 
-      <p className="text-foreground line-clamp-3">{review.text}</p>
+      {/* <p className="text-foreground line-clamp-3">{review.text}</p> */}
+      <ReviewText text={review.text} />
 
       {review.categories && Object.entries(review.categories).length > 0 && (
         <div className="space-y-2">
@@ -38,18 +42,7 @@ export function ReviewCard({ review }: ReviewCardProps) {
             ))}
         </div>
       )}
-
-      <div className="border-t border-border pt-4">
-        <p className="font-semibold text-foreground">{review.guestName}</p>
-        <p className="text-xs text-foreground/50">
-          {new Date(review.submittedAt).toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "short",
-            day: "numeric",
-          })}
-        </p>
-      </div>
-    </Card>
+    </div>
   )
 }
 
