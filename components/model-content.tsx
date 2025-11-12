@@ -2,7 +2,7 @@
 import { Badge } from "@/components/ui/badge"
 import { Card } from "./ui/card"
 import { Button } from "./ui/button"
-import { CheckCircle2, Globe, Star, XCircle } from "lucide-react"
+import { CheckCircle2, Globe, Star, XCircle } from "lucide-react";
 
 
 
