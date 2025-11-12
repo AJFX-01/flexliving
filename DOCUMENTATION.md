@@ -145,7 +145,7 @@ interface ReviewStats {
 
 ```
 GET https://api.hostaway.com/v1/reviews
-Headers: Authorization: Bearer {HOSTAWAY_API_KEY}
+Headers: Authorization: Bearer {ACCESS_TOKEN}
 ```
 
 **Implementation:**
@@ -154,12 +154,47 @@ Headers: Authorization: Bearer {HOSTAWAY_API_KEY}
 // app/api/reviews/hostaway/fetch/route.ts
 export async function GET() {
   const apiKey = process.env.HOSTAWAY_API_KEY
+  const accountID = process.env.HOSTAWAY_ACCOUNT_ID
+  
+
+  const data = new URLSearchParams({
+    grant_type: "client_credentials",
+    client_id: `${accountID}`,
+    client_secret: `${apiKey}`,
+    scope: "general",
+  });
+
+  // this call should only be made once to get accesstokem, becuase it can be reuasbale many times
+  // you ca persist in the db or any othe storage that wouldn,t expose it to the browser
+  
+  // const res = fetch("https://api.hostaway.com/v1/accessTokens", {
+  //   method: "POST",
+  //   headers: {
+  //     "Content-Type": "application/x-www-form-urlencoded",
+  //     "Cache-Control": "no-cache",
+  //   },
+  //   body: data,
+  //   credentials: "include",
+  // })
+  //   .then((res) => {
+  //     if (!res.ok) throw new Error(`Request failed with ${res.status}`);
+  //     return res.json();
+  //   })
+  //   .then((result) => console.log(result))
+  //   .catch((err) => console.error(err));
+
+  // const resdata = await res.json();
+  // const token = resdata.access_token;
+  
+
 
   // Mock data for now
-  // Production: Uncomment actual fetch
-  // const response = await fetch('https://api.hostaway.com/v1/reviews', {
-  //   headers: { 'Authorization': `Bearer ${apiKey}` }
-  // })
+  const response = await fetch(`https://api.hostaway.com/v1/reviews`, {
+    headers: { 'Authorization': `Bearer ${access_token}` }
+  });
+  const data = await response.json();
+
+  return Response.json(data)
 }
 ```
 

@@ -17,7 +17,7 @@ export async function GET() {
       )
     }
 
-  //   const data = new URLSearchParams({
+  //   const reqdata = new URLSearchParams({
   //     grant_type: "client_credentials",
   //     client_id: `${accountID}`,
   //     client_secret: `${apiKey}`,
@@ -30,7 +30,7 @@ export async function GET() {
   //       "Content-Type": "application/x-www-form-urlencoded",
   //       "Cache-Control": "no-cache",
   //     },
-  //     body: data,
+  //     body: reqdata,
   //     credentials: "include",
   //   })
   //     .then((res) => {
@@ -40,13 +40,12 @@ export async function GET() {
   //     .then((result) => console.log(result))
   //     .catch((err) => console.error(err));
 
-    // console.log(res);
     
     const response = await fetch(`https://api.hostaway.com/v1/reviews`, {
       headers: { 'Authorization': `Bearer ${token}` }
     });
     const data = await response.json();
-    console.log(data);
+
     return Response.json(data)
 
 
