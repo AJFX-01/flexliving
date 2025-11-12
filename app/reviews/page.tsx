@@ -8,6 +8,7 @@ import { Star, Wifi, Hotel, PaintBucket, ForkKnife, BathIcon, Calendar, Users } 
 import Link from "next/link"
 import { ReviewCard } from "@/components/review-card"
 import Image from "next/image"
+import { constantUtils } from "@/lib/const"
 
 
 
@@ -92,7 +93,7 @@ export default function ReviewsPage() {
 
             <div className="space-y-2 sm:space-y-6 order-1 md:order-2">
               <div className="grid grid-cols-2 md:grid-cols-2 gap-3 px-2">
-                {imageURLs.map((imageURL, index) => (
+                {constantUtils.imageURLs.map((imageURL, index) => (
                   <Image
                   key={index}
                   src={imageURL || ''} 
@@ -103,47 +104,6 @@ export default function ReviewsPage() {
                   height={100}
                 />))}
               </div>
-              {/* <div>
-                <h1 className="text-balance text-2xl sm:text-3xl md:text-4xl font-bold text-foreground">
-                  Stunning 2 Bed Flat near Tower Bridge
-                </h1>
-                <p className="mt-2 flex items-center gap-2 text-sm sm:text-base text-foreground/70">
-                  <MapPin className="h-4 w-4 shrink-0" />
-                  London, United Kingdom
-                </p>
-              </div>
-
-              <Card className="space-y-3 sm:space-y-4 bg-card p-4 sm:p-6">
-                <div className="flex items-end gap-3 sm:gap-4">
-                  <div className="flex items-baseline gap-1 sm:gap-2">
-                    <span className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary">{averageRating}</span>
-                    <span className="text-base sm:text-lg text-foreground/70">/10</span>
-                  </div>
-                  <div className="flex gap-1">
-                    {Array.from({ length: Math.round(Number(averageRating)) }).map((_, i) => (
-                      <Star key={i} className="h-4 w-4 sm:h-5 sm:w-5 fill-primary text-primary" />
-                    ))}
-                  </div>
-                </div>
-                <p className="text-xs sm:text-sm text-foreground/70">
-                  Based on {reviews.length} verified reviews from Hostaway & Google
-                </p>
-              </Card>
-
-              <div className="grid grid-cols-2 gap-2 sm:gap-3">
-                <div className="flex items-center gap-2 rounded-lg bg-muted px-3 sm:px-4 py-2 sm:py-3 transition-all hover:bg-muted/80">
-                  <Wifi className="h-4 w-4 sm:h-5 sm:w-5 text-primary shrink-0" />
-                  <span className="text-xs sm:text-sm font-medium">Free WiFi</span>
-                </div>
-                <div className="flex items-center gap-2 rounded-lg bg-muted px-3 sm:px-4 py-2 sm:py-3 transition-all hover:bg-muted/80">
-                  <Users className="h-4 w-4 sm:h-5 sm:w-5 text-primary shrink-0" />
-                  <span className="text-xs sm:text-sm font-medium">5 Guests</span>
-                </div>
-              </div>
-
-              <Button size="lg" className="w-full bg-primary hover:bg-primary/90 text-sm sm:text-base">
-                Reserve Now
-              </Button> */}
             </div>
           </div>
         </div>
@@ -219,7 +179,7 @@ export default function ReviewsPage() {
             <div>
               <span className=" text-primary font-semibold mb-4">House Rules</span>
               <div className="grid grid-cols-2 md:grid-cols-2 gap-3 my-5">
-                {rules.map((item, i) => (
+                {constantUtils.rules.map((item, i) => (
                   <span key={i} className="">{item}</span>
                 ))}
               </div>
@@ -269,12 +229,6 @@ export default function ReviewsPage() {
 }
 
 
-const imageURLs = [
-  "https://bookingenginecdn.hostaway.com/listing/23248-79029-SfTV9--CrlCv9---rP7uE5bSGCBJDCLTyaNLhH1NZ1B5k-68e64c0550cf3?width=1280&quality=70&format=webp&v=2",,
-  "https://bookingenginecdn.hostaway.com/listing/23248-79029-SfTV9--CrlCv9---rP7uE5bSGCBJDCLTyaNLhH1NZ1B5k-68e64c0550cf3?width=1280&quality=70&format=webp&v=2",
-  "https://bookingenginecdn.hostaway.com/listing/23248-79029-SfTV9--CrlCv9---rP7uE5bSGCBJDCLTyaNLhH1NZ1B5k-68e64c0550cf3?width=1280&quality=70&format=webp&v=2",
-  "https://bookingenginecdn.hostaway.com/listing/23248-79029-SfTV9--CrlCv9---rP7uE5bSGCBJDCLTyaNLhH1NZ1B5k-68e64c0550cf3?width=1280&quality=70&format=webp&v=2",
-]
 
 const amenitiesItem: {title: string; icon: React.JSX.Element}[] = [
   {
@@ -303,4 +257,3 @@ const amenitiesItem: {title: string; icon: React.JSX.Element}[] = [
   }
 ]
 
-const rules: string[] = ["Check-in: 3 pm", "Pets: not allowed", "Check-out: 10 am", "Smoking inside: not allowed" ]
