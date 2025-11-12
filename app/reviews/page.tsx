@@ -150,15 +150,15 @@ export default function ReviewsPage() {
       </section>
 
       
-      <section className="sm:py-16 relative">
-        <div className="w-1/2 p-0 m-0">
-          <div className="container mx-auto px-8">
+      <section className="sm:py-16 md:py-4 relative">
+        <div className="container mx-auto px-8 flex flex-row justify-between">
+          <div className="w-1/2"> 
             <div className="mb-5 sm:mb-8">
               <h2 className="text-2xl sm:text-3xl font-bold text-primary">Beautiful Pimlico Flat near Victoria Station - The Flex London</h2>
               <p className="mt-2 text-sm sm:text-base text-foreground/70">Apartment · 4 guests · 1 bedroom · 1 bathroom</p>
               <span className="flex flex-row items-center mt-4 font-bold text-primary" ><Star className="h-5 w-5 fill-amber-400 text-amber-400 mr-1 " />  {averageRating}  ·  <span className="text-primar underline font-bold ml-2">  ({reviews.length}) reviews</span> </span>
               <p className="my-5 text-ellipsis text-sm sm:text-base text-foreground/80">This spacious apartment in Pimlico is ideal for anyone looking for comfort and convenience. It’s just a short walk from everything you need – restaurants, shops, and public transport. The apartment has great quality amenities, making it a perfect home away from home. I’ve made sure it’s a welcoming,...</p>
-              <Button className="px-6 py-6 bg-background hover:bg-background cursor-pointer text-primary border rounded-3xl text-sm sm:text-base">
+              <Button className="px-6 py-6 bg-white hover:bg-white cursor-pointer text-primary border rounded-3xl text-sm sm:text-base">
                 Show more
               </Button> 
             </div>
@@ -174,7 +174,7 @@ export default function ReviewsPage() {
                   </div>
                 ))}
               </div>
-              <Button className="py-6 px-6 bg-background hover:bg-background cursor-pointer text-primary border rounded-3xl text-sm sm:text-base mt-5">
+              <Button className="py-6 px-6 bg-white hover:bg-white cursor-pointer text-primary border rounded-3xl text-sm sm:text-base mt-5">
                 Show all 47 amenities
               </Button> 
             </div>
@@ -191,7 +191,7 @@ export default function ReviewsPage() {
                   </div>
                 ))}
               </div>
-              <Button className="py-6 px-6 bg-background hover:bg-background cursor-pointer text-primary border rounded-3xl text-sm sm:text-base mt-5">
+              <Button className="py-6 px-6 bg-white hover:bg-white cursor-pointer text-primary border rounded-3xl text-sm sm:text-base mt-5">
                 Show all 47 amenities
               </Button> 
             </div>
@@ -211,7 +211,7 @@ export default function ReviewsPage() {
                 ))}
               </div>
             )}
-            <Button className="py-6 px-6 bg-background hover:bg-background cursor-pointer text-primary border rounded-3xl text-sm sm:text-base mt-5">
+            <Button className="py-6 px-6 bg-white hover:bg-white cursor-pointer text-primary border rounded-3xl text-sm sm:text-base mt-5">
               Show all {reviews.length} reviews
             </Button> 
             <div className="h-px w-full bg-border my-8" />
@@ -223,28 +223,28 @@ export default function ReviewsPage() {
                   <span key={i} className="">{item}</span>
                 ))}
               </div>
-              <Button className="px-4 py-4 bg-background hover:bg-background cursor-pointer text-primary border rounded-3xl text-sm sm:text-base">
+              <Button className="px-4 py-4 bg-white hover:bg-white cursor-pointer text-primary border rounded-3xl text-sm sm:text-base">
                 Show more
               </Button>
             </div>
             <p className=" text-primary font-semibold mt-6 mb-4">Cancellation policy</p>
             <span className="">100% refund up to 14 days before arrival</span>
           </div>
-        </div>
-        <Card className="bg-white flex flex-col gap-4 p-6 transition-all absolute top-0 right-8 w-[35%]">
-          <span className="text-center text-[12px] font-medium text-primary">Select dates and number of guests to see the total price per night</span>
-          <div className="flex items-center justify-between mb-4">
-            <Button className="w-[47%] justify-start py-6 bg-white hover:bg-white cursor-pointer text-primary/35 border rounded-3xl text-sm sm:text-base mt-5">
-              <Calendar className="text-primary/70 mr-3" /> Select Dates
+           <Card className="bg-white flex flex-col gap-4 p-6 transition-all  md:w-[40%] h-[300px]">
+            <span className="text-center text-[12px] font-medium text-primary">Select dates and number of guests to see the total price per night</span>
+            <div className="flex items-center justify-between mb-4">
+              <Button className="w-[47%] justify-start py-6 bg-white hover:bg-white cursor-pointer text-primary/35 border rounded-3xl text-sm sm:text-base mt-5">
+                <Calendar className="text-primary/70 mr-3" /> Select Dates
+              </Button> 
+              <Button className="w-[47%] justify-start py-6 bg-white hover:bg-white cursor-pointer text-start text-primary/35 border rounded-3xl text-sm sm:text-base mt-5">
+                <Users className="text-primary/70 mr-3" />  1
+              </Button> 
+            </div>
+            <Button className="w-full py-6 bg-white hover:bg-white cursor-pointer text-primary border rounded-3xl text-sm sm:text-base mt-5">
+              Send Inquiry
             </Button> 
-            <Button className="w-[47%] justify-start py-6 bg-white hover:bg-white cursor-pointer text-start text-primary/35 border rounded-3xl text-sm sm:text-base mt-5">
-              <Users className="text-primary/70 mr-3" />  1
-            </Button> 
-          </div>
-          <Button className="w-full py-6 bg-white hover:bg-white cursor-pointer text-primary border rounded-3xl text-sm sm:text-base mt-5">
-            Send Inquiry
-          </Button> 
         </Card>
+        </div>
       </section>
 
      
