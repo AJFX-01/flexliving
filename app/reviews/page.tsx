@@ -4,9 +4,11 @@ import { useEffect, useState } from "react"
 import { fetchHostawayReviewsFromServer, normalizeReview, fetchGoogleReviews, normalizeGoogleReview } from "@/lib/api"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Star, MapPin, Wifi, Home, Users } from "lucide-react"
+import { Star, MapPin, Wifi, Home, Users, Hotel, PaintBucket, ForkKnife, BathIcon } from "lucide-react"
 import Link from "next/link"
 import { ReviewCard } from "@/components/review-card"
+import Image from "next/image"
+
 
 
 export default function ReviewsPage() {
@@ -41,7 +43,7 @@ export default function ReviewsPage() {
   }, [])
 
   const averageRating =
-    reviews.length > 0 ? (reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length).toFixed(1) : 0
+    reviews.length > 0 ? (reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length).toFixed(2) : 0
 
   return (
     <div className="min-h-screen bg-background">
@@ -73,22 +75,35 @@ export default function ReviewsPage() {
         </div>
       </header>
 
-      <section className="bg-linear-to-b from-accent to-background py-8 sm:py-12 md:py-16">
-        <div className="container mx-auto px-4">
-          <div className="grid gap-6 md:gap-8 md:grid-cols-2">
+      <section className="bg-linear-to-b from-accent to-background py-4 sm:py-8 md:py-4">
+        <div className="container mx-auto px-8">
+          <div className="grid gap-2 md:gap-2 md:grid-cols-2">
             
-            <div className="overflow-hidden rounded-lg sm:rounded-xl bg-muted order-2 md:order-1">
-              <div className="aspect-video flex items-center justify-center">
-                <div className="text-center">
-                  <Home className="mx-auto mb-4 h-12 w-12 sm:h-16 sm:w-16 text-foreground/30" />
-                  <p className="text-sm sm:text-base text-foreground/50">Beautiful Property Image</p>
-                </div>
-              </div>
+            <div className="overflow-hidden rounded-3xl sm:rounded-xl bg-muted order-2 md:order-1">
+              <Image 
+                src={'https://bookingenginecdn.hostaway.com/listing/23248-79029-1DNvDYRdLXEs8zYkdv5-C--soHnVysh8PYgkf0eatwJM-68e64bf937084?width=1280&quality=70&format=webp&v=2'} 
+                alt={""} 
+                unoptimized={true} 
+                className="object-cover w-full h-full rounded-3xl"
+                width={100}
+                height={500}
+              />
             </div>
 
-            
-            <div className="space-y-4 sm:space-y-6 order-1 md:order-2">
-              <div>
+            <div className="space-y-2 sm:space-y-6 order-1 md:order-2">
+              <div className="grid grid-cols-2 md:grid-cols-2 gap-3 px-2">
+                {imageURLs.map((imageURL, index) => (
+                  <Image
+                  key={index}
+                  src={imageURL || ''} 
+                  alt={""} 
+                  unoptimized={true} 
+                  className="w-full h-[200px] rounded-3xl"
+                  width={100}
+                  height={100}
+                />))}
+              </div>
+              {/* <div>
                 <h1 className="text-balance text-2xl sm:text-3xl md:text-4xl font-bold text-foreground">
                   Stunning 2 Bed Flat near Tower Bridge
                 </h1>
@@ -128,20 +143,60 @@ export default function ReviewsPage() {
 
               <Button size="lg" className="w-full bg-primary hover:bg-primary/90 text-sm sm:text-base">
                 Reserve Now
-              </Button>
+              </Button> */}
             </div>
           </div>
         </div>
       </section>
 
       
-      <section className="py-12 sm:py-16">
-        <div className="container mx-auto px-4">
-          <div className="mb-8 sm:mb-12">
-            <h2 className="text-2xl sm:text-3xl font-bold text-foreground">Guest Reviews</h2>
-            <p className="mt-2 text-sm sm:text-base text-foreground/70">What guests are saying about this property</p>
+      <section className="sm:py-16 w-1/2">
+        <div className="container mx-auto px-8">
+          <div className="mb-5 sm:mb-8">
+            <h2 className="text-2xl sm:text-3xl font-bold text-primary">Beautiful Pimlico Flat near Victoria Station - The Flex London</h2>
+            <p className="mt-2 text-sm sm:text-base text-foreground/70">Apartment · 4 guests · 1 bedroom · 1 bathroom</p>
+            <span className="flex flex-row items-center mt-4 font-bold text-primary" ><Star className="h-5 w-5 fill-amber-400 text-amber-400 mr-1 " />  {averageRating}  ·  <span className="text-primar underline font-bold ml-2">  ({reviews.length}) reviews</span> </span>
+            <p className="my-5 text-ellipsis text-sm sm:text-base text-foreground/80">This spacious apartment in Pimlico is ideal for anyone looking for comfort and convenience. It’s just a short walk from everything you need – restaurants, shops, and public transport. The apartment has great quality amenities, making it a perfect home away from home. I’ve made sure it’s a welcoming,...</p>
+            <Button className="px-6 py-6 bg-background hover:bg-background cursor-pointer text-primary border rounded-3xl text-sm sm:text-base">
+              Show more
+            </Button> 
+          </div>
+          <div className="h-px w-full bg-border mb-8" />
+            
+          <div>
+             <h2 className="text-xl sm:text-xl font-bold text-primary mb-5">Amenities</h2> 
+             <div className="grid grid-cols-2 md:grid-cols-2 gap-6 px-2">
+              {amenitiesItem?.map((item, i) => (
+                <div key={i} className="flex flex-row gap-3">
+                  {item.icon}
+                  <span>{item.title}</span>
+                </div>
+              ))}
+             </div>
+            <Button className="py-6 px-6 bg-background hover:bg-background cursor-pointer text-primary border rounded-3xl text-sm sm:text-base mt-5">
+              Show all 47 amenities
+            </Button> 
+          </div>
+          
+           <div className="h-px w-full bg-border my-8" />
+
+          <div>
+             <h2 className="text-xl sm:text-xl font-bold text-primary mb-5">Available days</h2> 
+             <div className="grid grid-cols-2 md:grid-cols-2 gap-6 px-2">
+              {amenitiesItem?.map((item, i) => (
+                <div key={i} className="flex flex-row gap-3">
+                  {item.icon}
+                  <span>{item.title}</span>
+                </div>
+              ))}
+             </div>
+            <Button className="py-6 px-6 bg-background hover:bg-background cursor-pointer text-primary border rounded-3xl text-sm sm:text-base mt-5">
+              Show all 47 amenities
+            </Button> 
           </div>
 
+           <div className="h-px w-full bg-border my-8" />
+           <span className="flex flex-row text-primary items-center mt-4 font-bold text-xl mb-5" ><span className="text-primary text-xl font-bold mr-3"> Reviews</span> <Star className="h-6 w-6 fill-amber-400 text-amber-400 mr-1 " />  {averageRating}  ({reviews.length})  </span>
           {loading ? (
             <div className="py-12 text-center text-foreground/50">Loading reviews...</div>
           ) : reviews.length === 0 ? (
@@ -149,7 +204,7 @@ export default function ReviewsPage() {
               <p className="text-foreground/70">No reviews yet. Check back soon!</p>
             </Card>
           ) : (
-            <div className="grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-4 sm:gap-6 md:grid-cols-1 lg:grid-cols-1">
               {reviews.map((review) => (
                 <ReviewCard key={review.id} review={review} />
               ))}
@@ -178,3 +233,38 @@ export default function ReviewsPage() {
     </div>
   )
 }
+
+
+const imageURLs = [
+  "https://bookingenginecdn.hostaway.com/listing/23248-79029-SfTV9--CrlCv9---rP7uE5bSGCBJDCLTyaNLhH1NZ1B5k-68e64c0550cf3?width=1280&quality=70&format=webp&v=2",,
+  "https://bookingenginecdn.hostaway.com/listing/23248-79029-SfTV9--CrlCv9---rP7uE5bSGCBJDCLTyaNLhH1NZ1B5k-68e64c0550cf3?width=1280&quality=70&format=webp&v=2",
+  "https://bookingenginecdn.hostaway.com/listing/23248-79029-SfTV9--CrlCv9---rP7uE5bSGCBJDCLTyaNLhH1NZ1B5k-68e64c0550cf3?width=1280&quality=70&format=webp&v=2",
+  "https://bookingenginecdn.hostaway.com/listing/23248-79029-SfTV9--CrlCv9---rP7uE5bSGCBJDCLTyaNLhH1NZ1B5k-68e64c0550cf3?width=1280&quality=70&format=webp&v=2",
+]
+
+const amenitiesItem: {title: string; icon: React.JSX.Element}[] = [
+  {
+    title: 'Free WiFi',
+    icon: <Wifi />
+  },
+  {
+    title: 'Internet',
+    icon: <Wifi />
+  },
+  {
+    title: 'Private living room',
+    icon: <Hotel />
+  },
+    {
+    title: 'Essentials',
+    icon: <PaintBucket />
+  },
+    {
+    title: 'Towels',
+    icon: <BathIcon />
+  },
+    {
+    title: 'Kitchen',
+    icon: <ForkKnife />
+  }
+]

@@ -1,19 +1,19 @@
 export async function GET() {
   try {
-    const apiKey = process.env.HOSTAWAY_API_KEY
-    const accountID = process.env.HOSTAWAY_ACCOUNT_ID
+    // const apiKey = process.env.HOSTAWAY_API_KEY
+    // const accountID = process.env.HOSTAWAY_ACCOUNT_ID
 
 
-    if (!apiKey || !accountID) {
-      return Response.json(
-        {
-          status: "error",
-          message: "Hostaway API key not configured",
-          result: [],
-        },
-        { status: 500 },
-      )
-    }
+    // if (!apiKey || !accountID) {
+    //   return Response.json(
+    //     {
+    //       status: "error",
+    //       message: "Hostaway API key not configured",
+    //       result: [],
+    //     },
+    //     { status: 500 },
+    //   )
+    // }
 
     
     // const response = await fetch(`https://api.hostaway.com/v1/reviews?accountId=${accountID}`, {
