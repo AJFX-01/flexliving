@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { fetchHostawayReviewsFromServer, normalizeReview, fetchGoogleReviews, normalizeGoogleReview } from "@/lib/api"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Star, Wifi, Hotel, PaintBucket, ForkKnife, BathIcon } from "lucide-react"
+import { Star, Wifi, Hotel, PaintBucket, ForkKnife, BathIcon, Calendar, Users } from "lucide-react"
 import Link from "next/link"
 import { ReviewCard } from "@/components/review-card"
 import Image from "next/image"
@@ -46,7 +46,7 @@ export default function ReviewsPage() {
     reviews.length > 0 ? (reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length).toFixed(2) : 0
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-white">
 
       <header className="border-b border-border bg-card">
         <div className="container mx-auto flex flex-col items-center justify-between gap-4 px-4 py-4 sm:flex-row">
@@ -150,86 +150,101 @@ export default function ReviewsPage() {
       </section>
 
       
-      <section className="sm:py-16 w-1/2">
-        <div className="container mx-auto px-8">
-          <div className="mb-5 sm:mb-8">
-            <h2 className="text-2xl sm:text-3xl font-bold text-primary">Beautiful Pimlico Flat near Victoria Station - The Flex London</h2>
-            <p className="mt-2 text-sm sm:text-base text-foreground/70">Apartment · 4 guests · 1 bedroom · 1 bathroom</p>
-            <span className="flex flex-row items-center mt-4 font-bold text-primary" ><Star className="h-5 w-5 fill-amber-400 text-amber-400 mr-1 " />  {averageRating}  ·  <span className="text-primar underline font-bold ml-2">  ({reviews.length}) reviews</span> </span>
-            <p className="my-5 text-ellipsis text-sm sm:text-base text-foreground/80">This spacious apartment in Pimlico is ideal for anyone looking for comfort and convenience. It’s just a short walk from everything you need – restaurants, shops, and public transport. The apartment has great quality amenities, making it a perfect home away from home. I’ve made sure it’s a welcoming,...</p>
-            <Button className="px-6 py-6 bg-background hover:bg-background cursor-pointer text-primary border rounded-3xl text-sm sm:text-base">
-              Show more
-            </Button> 
-          </div>
-          <div className="h-px w-full bg-border mb-8" />
-            
-          <div>
-             <h2 className="text-xl sm:text-xl font-bold text-primary mb-5">Amenities</h2> 
-             <div className="grid grid-cols-2 md:grid-cols-2 gap-6 px-2">
-              {amenitiesItem?.map((item, i) => (
-                <div key={i} className="flex flex-row gap-3">
-                  {item.icon}
-                  <span>{item.title}</span>
-                </div>
-              ))}
-             </div>
-            <Button className="py-6 px-6 bg-background hover:bg-background cursor-pointer text-primary border rounded-3xl text-sm sm:text-base mt-5">
-              Show all 47 amenities
-            </Button> 
-          </div>
-          
-           <div className="h-px w-full bg-border my-8" />
-
-          <div>
-             <h2 className="text-xl sm:text-xl font-bold text-primary mb-5">Available days</h2> 
-             <div className="grid grid-cols-2 md:grid-cols-2 gap-6 px-2">
-              {amenitiesItem?.map((item, i) => (
-                <div key={i} className="flex flex-row gap-3">
-                  {item.icon}
-                  <span>{item.title}</span>
-                </div>
-              ))}
-             </div>
-            <Button className="py-6 px-6 bg-background hover:bg-background cursor-pointer text-primary border rounded-3xl text-sm sm:text-base mt-5">
-              Show all 47 amenities
-            </Button> 
-          </div>
-
-          <div className="h-px w-full bg-border my-8" />
-          <span className="flex flex-row text-primary items-center mt-4 font-bold text-xl mb-5" ><span className="text-primary text-xl font-bold mr-3"> Reviews</span> <Star className="h-6 w-6 fill-amber-400 text-amber-400 mr-1 " />  {averageRating}  ({reviews.length})  </span>
-          {loading ? (
-            <div className="py-12 text-center text-foreground/50">Loading reviews...</div>
-          ) : reviews.length === 0 ? (
-            <Card className="p-8 sm:p-12 text-center">
-              <p className="text-foreground/70">No reviews yet. Check back soon!</p>
-            </Card>
-          ) : (
-            <div className="grid gap-4 sm:gap-6 md:grid-cols-1 lg:grid-cols-1">
-              {reviews.map((review) => (
-                <ReviewCard key={review.id} review={review} />
-              ))}
+      <section className="sm:py-16 relative">
+        <div className="w-1/2 p-0 m-0">
+          <div className="container mx-auto px-8">
+            <div className="mb-5 sm:mb-8">
+              <h2 className="text-2xl sm:text-3xl font-bold text-primary">Beautiful Pimlico Flat near Victoria Station - The Flex London</h2>
+              <p className="mt-2 text-sm sm:text-base text-foreground/70">Apartment · 4 guests · 1 bedroom · 1 bathroom</p>
+              <span className="flex flex-row items-center mt-4 font-bold text-primary" ><Star className="h-5 w-5 fill-amber-400 text-amber-400 mr-1 " />  {averageRating}  ·  <span className="text-primar underline font-bold ml-2">  ({reviews.length}) reviews</span> </span>
+              <p className="my-5 text-ellipsis text-sm sm:text-base text-foreground/80">This spacious apartment in Pimlico is ideal for anyone looking for comfort and convenience. It’s just a short walk from everything you need – restaurants, shops, and public transport. The apartment has great quality amenities, making it a perfect home away from home. I’ve made sure it’s a welcoming,...</p>
+              <Button className="px-6 py-6 bg-background hover:bg-background cursor-pointer text-primary border rounded-3xl text-sm sm:text-base">
+                Show more
+              </Button> 
             </div>
-          )}
-          <Button className="py-6 px-6 bg-background hover:bg-background cursor-pointer text-primary border rounded-3xl text-sm sm:text-base mt-5">
-            Show all {reviews.length} reviews
-          </Button> 
-          <div className="h-px w-full bg-border my-8" />
-          <span className="flex flex-row text-primary items-center mt-4 font-bold text-xl mb-5">Good to know</span>
-          <div>
-            <span className=" text-primary font-semibold mb-4">House Rules</span>
-             <div className="grid grid-cols-2 md:grid-cols-2 gap-3 my-5">
-              {rules.map((item, i) => (
-                <span key={i} className="">{item}</span>
-              ))}
-             </div>
-             <Button className="px-4 py-4 bg-background hover:bg-background cursor-pointer text-primary border rounded-3xl text-sm sm:text-base">
-              Show more
-            </Button>
+            <div className="h-px w-full bg-border mb-8" />
+              
+            <div>
+              <h2 className="text-xl sm:text-xl font-bold text-primary mb-5">Amenities</h2> 
+              <div className="grid grid-cols-2 md:grid-cols-2 gap-6 px-2">
+                {amenitiesItem?.map((item, i) => (
+                  <div key={i} className="flex flex-row gap-3">
+                    {item.icon}
+                    <span>{item.title}</span>
+                  </div>
+                ))}
+              </div>
+              <Button className="py-6 px-6 bg-background hover:bg-background cursor-pointer text-primary border rounded-3xl text-sm sm:text-base mt-5">
+                Show all 47 amenities
+              </Button> 
+            </div>
+            
+            <div className="h-px w-full bg-border my-8" />
+
+            <div>
+              <h2 className="text-xl sm:text-xl font-bold text-primary mb-5">Available days</h2> 
+              <div className="grid grid-cols-2 md:grid-cols-2 gap-6 px-2">
+                {amenitiesItem?.map((item, i) => (
+                  <div key={i} className="flex flex-row gap-3">
+                    {item.icon}
+                    <span>{item.title}</span>
+                  </div>
+                ))}
+              </div>
+              <Button className="py-6 px-6 bg-background hover:bg-background cursor-pointer text-primary border rounded-3xl text-sm sm:text-base mt-5">
+                Show all 47 amenities
+              </Button> 
+            </div>
+
+            <div className="h-px w-full bg-border my-8" />
+            <span className="flex flex-row text-primary items-center mt-4 font-bold text-xl mb-5" ><span className="text-primary text-xl font-bold mr-3"> Reviews</span> <Star className="h-6 w-6 fill-amber-400 text-amber-400 mr-1 " />  {averageRating}  ({reviews.length})  </span>
+            {loading ? (
+              <div className="py-12 text-center text-foreground/50">Loading reviews...</div>
+            ) : reviews.length === 0 ? (
+              <Card className="p-8 sm:p-12 text-center">
+                <p className="text-foreground/70">No reviews yet. Check back soon!</p>
+              </Card>
+            ) : (
+              <div className="grid gap-4 sm:gap-6 md:grid-cols-1 lg:grid-cols-1">
+                {reviews.map((review) => (
+                  <ReviewCard key={review.id} review={review} />
+                ))}
+              </div>
+            )}
+            <Button className="py-6 px-6 bg-background hover:bg-background cursor-pointer text-primary border rounded-3xl text-sm sm:text-base mt-5">
+              Show all {reviews.length} reviews
+            </Button> 
+            <div className="h-px w-full bg-border my-8" />
+            <span className="flex flex-row text-primary items-center mt-4 font-bold text-xl mb-5">Good to know</span>
+            <div>
+              <span className=" text-primary font-semibold mb-4">House Rules</span>
+              <div className="grid grid-cols-2 md:grid-cols-2 gap-3 my-5">
+                {rules.map((item, i) => (
+                  <span key={i} className="">{item}</span>
+                ))}
+              </div>
+              <Button className="px-4 py-4 bg-background hover:bg-background cursor-pointer text-primary border rounded-3xl text-sm sm:text-base">
+                Show more
+              </Button>
+            </div>
+            <p className=" text-primary font-semibold mt-6 mb-4">Cancellation policy</p>
+            <span className="">100% refund up to 14 days before arrival</span>
           </div>
-          <p className=" text-primary font-semibold mt-6 mb-4">Cancellation policy</p>
-          <span className="">100% refund up to 14 days before arrival</span>
         </div>
-        
+        <Card className="bg-white flex flex-col gap-4 p-6 transition-all absolute top-0 right-8 w-[35%]">
+          <span className="text-center text-[12px] font-medium text-primary">Select dates and number of guests to see the total price per night</span>
+          <div className="flex items-center justify-between mb-4">
+            <Button className="w-[47%] justify-start py-6 bg-white hover:bg-white cursor-pointer text-primary/35 border rounded-3xl text-sm sm:text-base mt-5">
+              <Calendar className="text-primary/70 mr-3" /> Select Dates
+            </Button> 
+            <Button className="w-[47%] justify-start py-6 bg-white hover:bg-white cursor-pointer text-start text-primary/35 border rounded-3xl text-sm sm:text-base mt-5">
+              <Users className="text-primary/70 mr-3" />  1
+            </Button> 
+          </div>
+          <Button className="w-full py-6 bg-white hover:bg-white cursor-pointer text-primary border rounded-3xl text-sm sm:text-base mt-5">
+            Send Inquiry
+          </Button> 
+        </Card>
       </section>
 
      
