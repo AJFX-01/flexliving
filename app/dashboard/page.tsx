@@ -4,13 +4,14 @@ import { useEffect, useMemo, useState } from "react"
 import { fetchHostawayReviewsFromServer, normalizeReview, fetchGoogleReviews, normalizeGoogleReview } from "@/lib/api"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { CheckCircle2, XCircle, Star, Search, Globe } from "lucide-react"
+import { CheckCircle2, Star, Globe, Home, Sigma } from "lucide-react"
 import Link from "next/link"
 import { constantUtils } from "@/lib/const"
 import { DasboardReviewCard } from "@/components/dashboard-review"
+import { SimpleModal } from "@/components/modal"
+import { ModalContent } from "@/components/model-content"
 
 export default function Dashboard() {
   const [reviews, setReviews] = useState<NormalizedReview[]>([])
@@ -20,6 +21,10 @@ export default function Dashboard() {
   const [filterStatus, setFilterStatus] = useState("all")
   const [filterSource, setFilterSource] = useState("all")
   const [sortBy, setSortBy] = useState("newest")
+  const [selectedReview, setSelectedReview] = useState<NormalizedReview | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+
 
   useEffect(() => {
     const loadReviews = async () => {
@@ -85,6 +90,18 @@ export default function Dashboard() {
     setReviews(reviews.map((r) => (r.id === id ? { ...r, status: "rejected" } : r)))
   }
 
+  const openModal = (review: NormalizedReview) => {
+    setSelectedReview(review);
+    setIsModalOpen(true);
+  };
+
+  // const closeModal = () => {
+  //   setSelectedReview(null);
+  //   setIsModalOpen(false);
+  // };
+
+
+
   const stats = {
     total: reviews.length,
     hostaway: reviews.filter((r) => r.source === "hostaway").length,
@@ -116,47 +133,57 @@ export default function Dashboard() {
       <div className="container mx-auto px-4 py-6 sm:py-8">
         
         <div className="mb-8 grid gap-3 sm:gap-4 sm:grid-cols-2 lg:grid-cols-5">
-          <Card className="p-4 sm:p-6">
-            <div className="text-xs sm:text-sm font-medium text-foreground/70">Total Reviews</div>
-            <div className="mt-2 text-2xl sm:text-3xl font-bold text-primary">{stats.total}</div>
+          <Card className="px-2 sm:p-4 shadow-none  border-none">
+             <div className="flex items-center justify-between">
+                <div>
+                  <div className="text-xs sm:text-sm font-medium text-foreground/70">Total Reviews</div>
+                  <div className="mt-2 text-xl sm:text-xl font-bold text-primary">{stats.total}</div>
+                </div>
+                <Sigma />
+            </div>
           </Card>
-          <Card className="p-4 sm:p-6">
-            <div className="text-xs sm:text-sm font-medium text-foreground/70">Hostaway</div>
-            <div className="mt-2 text-2xl sm:text-3xl font-bold text-blue-600">{stats.hostaway}</div>
+          <Card className="px-2 sm:p-4 shadow-none  border-none">
+            <div className="flex items-center justify-between">
+                <div>
+                  <div className="text-xs sm:text-sm font-medium text-foreground/70">Hostaway Reviews</div>
+                  <div className="mt-2 text-xl sm:text-xl font-bold text-primary">{stats.hostaway}</div>
+                </div>
+                <Home />
+            </div>
           </Card>
-          <Card className="p-4 sm:p-6">
+          <Card className="px-2 sm:p-4 shadow-none  border-none">
             <div className="flex items-center justify-between">
               <div>
                 <div className="text-xs sm:text-sm font-medium text-foreground/70">Google</div>
-                <div className="mt-2 text-2xl sm:text-3xl font-bold text-red-600">{stats.google}</div>
+                <div className="mt-2 text-xl sm:text-xl font-bold text-red-600">{stats.google}</div>
               </div>
               <Globe className="h-5 w-5 sm:h-6 sm:w-6 text-red-600" />
             </div>
           </Card>
-          <Card className="p-4 sm:p-6">
+          <Card className="px-2 sm:p-4 shadow-none  border-none">
             <div className="flex items-center justify-between">
               <div>
                 <div className="text-xs sm:text-sm font-medium text-foreground/70">Approved</div>
-                <div className="mt-2 text-2xl sm:text-3xl font-bold text-green-600">{stats.approved}</div>
+                <div className="mt-2 text-xl sm:text-xl font-bold text-green-600">{stats.approved}</div>
               </div>
               <CheckCircle2 className="h-5 w-5 sm:h-6 sm:w-6 text-green-600" />
             </div>
           </Card>
-          <Card className="p-4 sm:p-6">
+          <Card className="px-2 sm:p-4 shadow-none  border-none">
             <div className="flex items-center justify-between">
               <div>
                 <div className="text-xs sm:text-sm font-medium text-foreground/70">Avg Rating</div>
-                <div className="mt-2 text-2xl sm:text-3xl font-bold text-primary">{stats.averageRating}</div>
+                <div className="mt-2 text-xl sm:text-xl font-bold text-primary">{stats.averageRating}</div>
               </div>
               <Star className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
             </div>
           </Card>
         </div>
 
-        <Card className="mb-6 p-4 sm:p-6">
+        <Card className="mb-6 p-4 sm:p-6 shadow-none border-none">
           <div className="space-y-3 sm:space-y-4">
             <div className="flex items-center gap-2">
-              <Search className="h-5 w-5 text-foreground/50 shrink-0" />
+              {/* <Search className="h-5 w-5 text-foreground/50 shrink-0" /> */}
               <Input
                 placeholder="Search reviews..."
                 value={searchTerm}
@@ -208,12 +235,23 @@ export default function Dashboard() {
           ) : filteredReviews.length === 0 ? (
             <div className="py-12 text-center text-foreground/50">No reviews found</div>
           ) : (
-            filteredReviews.map((review, i) => (
-              <DasboardReviewCard key={i} review={review} handleApprove={handleApprove} handleReject={handleReject} />
-            ))
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 px-2">
+             { filteredReviews.map((review, i) => (
+                <DasboardReviewCard 
+                  key={i} 
+                  review={review} 
+                  handleApprove={handleApprove} 
+                  handleReject={handleReject} 
+                  openModal={openModal}
+                />
+              ))}
+            </div>
           )}
         </div>
       </div>
+     <SimpleModal title="Review Details" open={isModalOpen}  setOpen={setIsModalOpen} content={
+      <ModalContent review={selectedReview!}  handleApprove={handleApprove} handleReject={handleReject}/>
+     } />
     </div>
   )
 }

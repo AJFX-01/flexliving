@@ -3,21 +3,17 @@ import { Badge } from "@/components/ui/badge"
 import { Card } from "./ui/card"
 import { Button } from "./ui/button"
 import { CheckCircle2, Globe, Star, XCircle } from "lucide-react"
-import { useState } from "react"
 
 
-export const DasboardReviewCard = ({
-  review, handleApprove, handleReject, openModal
+
+export const ModalContent = ({
+  review, handleApprove, handleReject
 }
   : {
     review: NormalizedReview, 
     handleApprove: (id: string) => void, 
     handleReject: (id: string) => void, 
-    openModal: (review: NormalizedReview) => void
  }) => {
-
-  const [expanded, ] = useState(false)
-
 
   return (
     <Card key={review.id} className="p-4 sm:p-6 shadow-none border-none">
@@ -67,20 +63,14 @@ export const DasboardReviewCard = ({
         </div>
         <span className="text-xs sm:text-sm text-foreground/70 mt-1">{review.propertyName}</span>
 
-        <div>
-          <p className={`text-foreground line-clamp-2`}>
+        
+          <p className={`text-foreground`}>
             {review.text}
           </p>
-          <button
-            onClick={() => openModal(review)}
-            className="mt-1 text-sm font-bold text-primary hover:underline"
-          >
-            {expanded ? "Hide" : "Show more"}
-          </button>
-        </div>
 
-        {/* {Object.entries(review.categories).length > 0 && (
-          <div className="grid gap-2 grid-cols-1 sm:grid-cols-1 md:grid-cols-1">
+
+        {Object.entries(review.categories).length > 0 && (
+          <div className="grid gap-2 grid-cols-1 sm:grid-cols-1 md:grid-cols-2">
             {Object.entries(review.categories).map(([category, rating]: [string, number]) => (
               <div
                 key={category}
@@ -93,9 +83,7 @@ export const DasboardReviewCard = ({
               </div>
             ))}
           </div>
-        )} */}
-
-        {review.source === 'google' && <></>}
+        )}
 
         <div className="flex flex-col gap-2 sm:flex-row sm:gap-3 pt-2">
           {review.status !== "approved" && (

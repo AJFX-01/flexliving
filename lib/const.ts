@@ -27,11 +27,17 @@ const ratingFilterItems: { [key: string]: string } = {
 }
 
 
+const otherSpecRate: string[] = [
+  "respect house rules", "communication", "respect house rules", "accuracy", "cleanliness"
+]
+
+
 export const constantUtils = {
   rules,
   imageURLs,
   statusFilterItems,
   sourceFilterItems,
-  ratingFilterItems
+  ratingFilterItems,
+  otherSpecRate
 
 }
