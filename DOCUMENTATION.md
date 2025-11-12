@@ -1,6 +1,3 @@
-Here’s your README properly formatted and styled for clean readability in Markdown — preserving structure, indentation, and code fences:
-
----
 
 # **Flex Living Reviews Dashboard — Technical Documentation**
 
@@ -372,4 +369,3 @@ const toggleApproval = (id: string, newStatus: 'approved' | 'rejected') => {
 
 ---
 
-Would you like me to make this README **GitHub-optimized** (with emojis for sections, code color hints, and collapsible sections)? It’ll make it more visually engaging for public repos.
