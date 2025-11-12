@@ -6,7 +6,7 @@ import { Star, BarChart3, Eye, ArrowRight } from "lucide-react"
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-linear-to-b from-accent to-background">
+    <main className="min-h-screen bg-white">
       <div className="container mx-auto px-4 py-12 md:py-24">
 
         <div className="mb-12 text-center md:mb-16">
